@@ -9,15 +9,16 @@ Ansible plugins and modules to make network automation easier.
     # Get ntc-templates
     git clone https://github.com/networktocode/ntc-templates
     
-    # PIP install any of the filter's requirements
-    pip install git+https://github.com/ktbyers/ansible_helpers.git
+    # PIP install any of the dependencies specified in requirements.txt
+    pip install gtextfsm
+    pip install terminal
     
     # Setup environment variable
     export NET_TEXTFSM=/path/to/ntc-templates/templates/
     
-    # Copy https://github.com/ktbyers/ansible_helpers/filter_plugins/ to either:
+    # Copy https://github.com/ktbyers/ansible_helpers/tree/master/filter_plugins to either:
     1. ./filter_plugins directory relative to your playbook
-    2. Central filter_plugins directory as specified in your .ansible.cfg
+    2. a central filter_plugins directory as specified in your .ansible.cfg
 
 *_Example Use_*
 
