@@ -81,8 +81,3 @@ if __name__ == "__main__":
 
     # Test code
     pass
-
-    # Test case when ntc-templates isn't there
-    # Test environment variable pointint to ntc-templates
-    # Test environment variable pointint to ntc-templates/templates
-    # Test using ./filter_plugins and setting in ansible.cfg
