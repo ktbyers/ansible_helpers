@@ -5,6 +5,7 @@ Ansible plugins and modules to make network automation easier.
 ### Using net_txtfsm_parse filter
   
 *_Purpose_*
+  
 Convert unstructured data from Ansible core networking modules (like ios_command, eos_command, nxos_command) into structured data using TextFSM templates.  
   
   
