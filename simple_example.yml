@@ -1,6 +1,8 @@
 ---
 - name: Simple example using net_textfsm_parse filter
   hosts: pynet-rtr1
+  gather_facts: no
+  connection: local
   vars:
     creds:
       host: "{{ ansible_host }}"
