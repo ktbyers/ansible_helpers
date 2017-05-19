@@ -1,0 +1,25 @@
+---
+- name: Simple example using net_textfsm_parse filter
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+
+    platform: cisco_ios
+    command: show ip int brief
+
+  tasks:
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: "{{ command }}"
+      register: output
+
+    - name: Example hard-coding the platform and command into the parsing
+      debug:
+        msg: "{{ output | net_textfsm_parse('cisco_ios', 'show ip int brief') }}"
+
+    - name: Example, using variables defined above for net_textfsm_parse
+      debug:
+        msg: "{{ output | net_textfsm_parse(platform, command) }}"
