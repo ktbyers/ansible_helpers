@@ -63,7 +63,7 @@ def net_textfsm_parse(output, platform, command):
     """Process config find interfaces using ip helper."""
     try:
         output = output['stdout'][0]
-    except (KeyError, IndexError):
+    except (KeyError, IndexError, TypeError):
         pass
     return get_structured_data(output, platform, command)
 
