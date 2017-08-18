@@ -1,0 +1,21 @@
+---
+- name: IOS Example
+  hosts: cisco
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - ios_facts:
+        provider: "{{ creds }}"
+      tags: facts_only
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show run
+      register: show_run
+
+    - debug:
+        msg: "{{ show_run | confparse_parent(parent='^interface', child='no ip address') }}"
+
