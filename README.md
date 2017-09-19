@@ -41,6 +41,7 @@ See https://github.com/ktbyers/ansible_helpers/blob/master/simple_example.yml
 
 <br>  
 <br>  
+
 ### Using confparse_parent filter
   
 *_Purpose_*
