@@ -1,0 +1,42 @@
+---
+- name: Crypto map and confparse filter
+  hosts: pynet-rtr1
+  vars:
+    creds:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: Verify Connectivity
+      ios_facts:
+        provider: "{{ creds }}"
+      tags: facts_only
+
+    - name: Get current running configuration
+      ios_command:
+        provider: "{{ creds }}"
+        commands: show run
+      register: show_run
+
+    - name: Use confparse_parent filter to find 3DES crypto maps
+      set_fact:
+        crypto_list: "{{ show_run | confparse_parent(parent='^crypto map CRYPTO', child='3DES.*') }}"
+
+    - name: Construct variable using elements that meet 3DES condition
+      set_fact:
+        crypto_list_new: "{{ crypto_list_new | default([]) + [ item[1] ] }}"
+      with_items: 
+        - "{{ crypto_list }}"
+      when: "item[0]"
+
+    - debug:
+        var: crypto_list_new
+
+    - name: Convert 3DES over to AES
+      ios_config:
+        provider: "{{ creds }}"
+        parents: "{{ item }}"
+        lines: 
+          - set transform-set AES-SHA
+      with_items: "{{ crypto_list_new }}"
+      when: "crypto_list_new is defined"
