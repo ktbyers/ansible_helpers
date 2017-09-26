@@ -41,6 +41,7 @@ See https://github.com/ktbyers/ansible_helpers/blob/master/simple_example.yml
 
 <br>  
 <br>  
+
 ### Using confparse_parent filter
   
 *_Purpose_*
@@ -55,7 +56,7 @@ Allow use of CiscoConfParse to parse space-based hierarchical configurations and
         crypto_list: "{{ show_run | confparse_parent(parent='^crypto map CRYPTO', child='3DES-SHA') }}"
 
 
-The returned data structure looks as follows where element[0] is a boolean indicating whether the child condition was found. Element[1] is the matching parent configuration line. Element[2] is the matching child configuration line (or null if not found).
+The returned data structure looks as follows:
 
         "crypto_list": [
             [
@@ -85,6 +86,10 @@ The returned data structure looks as follows where element[0] is a boolean indic
             ]
         ]
 
+Where:
+- element[0] is a boolean indicating whether the child condition was matched
+- element[1] is the matching parent configuration line
+- element[2] is the matching child configuration line (or null if not found).
   
   
 *_Setup_*
